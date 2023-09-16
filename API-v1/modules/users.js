@@ -10,6 +10,7 @@ module.exports = {
         app.post(api + "/NewUserRegister",async function (req, res) {
             console.log("API has been Accessed from /api/v1/NewUserRegister and the IP is " + req.ip);
             try {
+                let error = false;
                 const username = req.body.username;
                 const password = req.body.password;
                 const email = req.body.email;
@@ -19,9 +20,9 @@ module.exports = {
                 if (!username || !password || !email || !FirstName || !LastName) {
                     return res.status(400).send("Bad Request");
                 }
-        
+                let newUserID = sha512(username + Config.salt)
                 const newUser = new User({
-                    userID: sha512(username + Config.salt),
+                    userID: newUserID,
                     userName: username,
                     userPassword: sha512(password + Config.salt),
                     email: email,
@@ -31,29 +32,26 @@ module.exports = {
                     userBalance: 0,
                     paymentMethods: []
                 });
-                // make a user by sending a post request with the email as the body http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client
-
                 axios.post('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client', {
                     "name": FirstName + " " + LastName,
                     "emailAddress": email
-                })
-                .then(function (response) {
-                    console.log(response);
-                })
-                .catch(function (error) {
-                    console.log(error);
+                }).catch(e => {});
+
+                if (await User.findOne({ username: username })) {
+                    return res.status(400).send("Bad Request");
+                }
+
+                if (await User.findOne({ email: email })) { 
+                    return res.status(400).send("Bad Request");
+                }
+
+                await newUser.save().catch(e => {
                     return res.status(500).send("Internal Server Error");
                 });
 
-        
-                await newUser.save().catch(e => {
-                    console.log(`Failed to create user: ${e}`)
-                    return res.status(500).send("Internal Server Error")
-                });
-        
                 res.status(200).send({
                     "success": true,
-                    "userID" : userID,
+                    "userID" : newUserID,
                     "userName" : username
                 });
             } catch (err) {
@@ -69,10 +67,8 @@ module.exports = {
                 const username = req.body.username;
                 const password = req.body.password;
                 const email = req.body.email;
-                const FirstName = req.body.FirstName;
-                const LastName = req.body.LastName;
 
-                if (!username || !password || !email || !FirstName || !LastName) {
+                if (!username || !password || !email) {
                     return res.status(400).send("Bad Request");
                 }
 
@@ -94,20 +90,17 @@ module.exports = {
                 while (fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + sessionID + ".json"))) {
                     sessionID = Math.floor(Math.random() * 10000000000000000);
                 }
+                //read all filenames in activesessions folder and find the one with the same username
+                
                 //create session file
-                fs.writeFileSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + sessionID + ".json"), JSON.stringify({
+                fs.writeFileSync(path.join(__dirname, "../nonpersistent/ActiveSessions/"+username+"-"+sessionID + ".json"), JSON.stringify({
                     "userID": user.userID,
                     "userName": user.userName,
-                    "userFirstName": user.userFirstName,
-                    "userLastName": user.userLastName,
-                    "userGroups": user.userGroups,
-                    "userBalance": user.userBalance,
-                    "paymentMethods": user.paymentMethods
                 }));
                 //send sessionID to user
                 res.status(200).send({
                     "success": true,
-                    "userID" : userID,
+                    "userID" : user.userID,
                     "userName" : username,
                     "sessionID" : sessionID
                 });

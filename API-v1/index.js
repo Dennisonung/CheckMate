@@ -19,7 +19,7 @@ for (const i in modules) {
 	if (!ForbiddenFiles.includes(file)) {
 		const userModule = require("./modules/" + file);
 		console.debug("Init module " + file);
-		userModule.run(app, path, fs, sha512);
+		userModule.run(app, path, fs, sha512, global. Config);
 	};
 }
 app.all('/*', (req, res) => res.status(404).send({ error: "Endpoint does not exist", code: 404}));
