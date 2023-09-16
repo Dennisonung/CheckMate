@@ -1,6 +1,4 @@
-
 const mongoose = require('mongoose');
-
 const BillingInvoice = new mongoose.Schema({
     _billingId: String,
     invoiceID: String,
@@ -11,5 +9,4 @@ const BillingInvoice = new mongoose.Schema({
     Spilt: [Number],
     Status: String,
 });
-
 module.exports = mongoose.model('Invoice', BillingInvoice);
