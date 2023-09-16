@@ -7,8 +7,12 @@ const Billing = () => {
 
     const [total, setTotal] = useState('')
 
-    const tempPeopleArry = ["john", "dennis", "sadik", "mohammed"]
-    const divFactor = tempPeopleArry.length
+    const tempPeopleArray = [
+        {"name":"john", "id": 1},
+        {"name": "dennis", "id": 2},
+        {"name": "sidak", "id": 3}
+    ]
+    const divFactor = tempPeopleArray.length
 
     const handleChange = e => {
         setTotal(e.target.value);
@@ -16,35 +20,43 @@ const Billing = () => {
 
     const handleClick = e => {
         e.preventDefault();
-        console.log(total)
     }
 
+    var max = (total > 3000)? false : true
 
     return (
         <div>
             <div className="containerDiv">
+<<<<<<< Updated upstream
                 <div id='textDiv'>
                     <h1> Create a New Bill</h1>
                     <h3 id='subheading'>Be sure all members splitting this bill have been selected on the Group page</h3>
                 </div>
+=======
+                <h1>New Bill</h1>
+
+                <h3 className='bold'>*** Be sure all members splitting this bill have been selected on the Home page</h3>
+>>>>>>> Stashed changes
 
                 <div className="billDiv">
 
                     <div className="totalInput">
-                        <label htmlFor="total">Total Bill</label>
-                        <input type="number" id="total" onChange={handleChange} placeholder='$' />
+                        <label htmlFor="total">Total Bill (Max. $3000)</label>
+                        <input min={divFactor} max='3000' type="number" id="total" onChange={handleChange} placeholder='$' />
                         <button className="button" onClick={handleClick}>Confirm</button>
                     </div>
 
                     <div className="payeeList">
                         <h2>Payee List:</h2>
-                        <ul>
-                            {tempPeopleArry.map((p) => {
-                                <>
-                                    <li>hello</li>
-                                </>
-                            })}
-                        </ul>
+                        <div className="payeeContainer">
+                            <ul>
+                                {tempPeopleArray.map(p => {
+                                    return (
+                                        <li key={p.id}>{p.name}</li>
+                                    )
+                                })}
+                            </ul>
+                        </div>
                     </div>
 
                 </div>
@@ -52,7 +64,11 @@ const Billing = () => {
                 <div className="container">
 
                     <div className="summary">
+<<<<<<< Updated upstream
                         {total && <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total / divFactor)}</h3>}
+=======
+                        {max && total && <h3>${total} split {divFactor} ways, each party pays ${Math.round(100 * total/divFactor)/100}</h3>}
+>>>>>>> Stashed changes
                     </div>
 
                 </div>

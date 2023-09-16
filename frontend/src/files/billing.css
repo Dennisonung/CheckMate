@@ -74,9 +74,16 @@
 }
 
 .payeeList {
+<<<<<<< Updated upstream
   display: flex;
   flex-direction: column;
   gap: 10px;
+=======
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    font-size: 24px;
+>>>>>>> Stashed changes
 }
 
 .buttonDiv > .button {
@@ -84,7 +91,19 @@
 }
 
 .buttonDiv {
+<<<<<<< Updated upstream
   display: flex;
   justify-content: center;
   align-items: flex-end;
 }
+=======
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
+}
+
+.payeeContainer {
+    display: flex;
+    gap: 30px;
+}           
+>>>>>>> Stashed changes
