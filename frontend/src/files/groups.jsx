@@ -3,6 +3,7 @@ import Navbar from './navbar'
 import axios from 'axios'
 import { React, useState } from 'react'
 import { GroupsDiv } from './home'
+import './groups.css'
 
 
 const blankGroupData = {
@@ -44,7 +45,9 @@ const testGroupData = {
 const Groups = () => {
     return (
         <div>
-            <h1>Groups Page</h1>
+            <div id="textDiv">
+                <h1>Groups Page</h1>
+            </div>
             <Navbar />
             <GroupsDiv />
         </div>
