@@ -6,19 +6,19 @@ import axios from 'axios'
 
 const blankGroupData = {
     "group1": {
-        "name": "",
-        "iconURL": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fdefault-profile-picture&psig=AOvVaw1gATADA750RrliQZLHu2-z&ust=1694955307334000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDvvf2Wr4EDFQAAAAAdAAAAABAf",
-        "balance": ""
+        "name": "Getting there info",
+        "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        "balance": "0.00"
     },
     "group2": {
-        "name": "",
-        "iconURL": "",
-        "balance": ""
+        "name": "Getting there info",
+        "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        "balance": "0.00"
     },
     "group3": {
-        "name": "",
-        "iconURL": "",
-        "balance": ""
+        "name": "Getting there info",
+        "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+        "balance": "0.00"
     }
 }
 const testGroupData = {
@@ -56,19 +56,42 @@ const GroupsDiv = () => {
     }, 2000);
 
     return (<>
-        <div id='groups'>
-            {Object.keys(groupInfo).map((key) => (
-                <div key={key} className="groupDiv">
-                    <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
-                    <div className='groupDivText'>
-                        <h2>{groupInfo[key].name}</h2>
-                        <p>Balance: {groupInfo[key].balance}</p>
+        <form action="">
+            <div id='groups'>
+                {Object.keys(groupInfo).map((key) => (
+                    <div key={key} className="groupDiv">
+                        <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
+                        <div className='groupDivText'>
+                            <h2>{groupInfo[key].name}</h2>
+                            <p>Balance: {groupInfo[key].balance}</p>
+                        </div>
+                        <input type="radio" name="Select" className='radioBtn' type="checkbox" />
                     </div>
+                ))}
+                <div id="createBillDiv">
+
+                    <button id='createBill' onClick={handleCreateBill}> Create New Bill </button>
                 </div>
-            ))}
-        </div>
+            </div>
+        </form>
     </>
     );
+    function handleCreateBill(event) {
+        event.preventDefault(); // Prevent the form from submitting (if needed)
+
+        // Collect selected values
+        const selectedGroups = [];
+        const checkboxes = document.querySelectorAll('.radioBtn'); // Assuming checkboxes have the class 'radioBtn'
+
+        checkboxes.forEach(checkbox => {
+            if (checkbox.checked) {
+                selectedGroups.push(checkbox.value);
+            }
+        });
+
+        // Do something with the selected values (e.g., send them to the server)
+        console.log('Selected groups:', selectedGroups);
+    }
 }
 const Greeting = () => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -100,21 +123,12 @@ const Greeting = () => {
 
 
 }
-const CreateBill = () => {
-    return (
-        <div id="createBillDiv">
-
-            <button id='createBill'> Create New Bill </button>
-        </div>
-    )
-}
 const Home = () => {
     return (
         <div id='home'>
             <Greeting />
             <Navbar />
             <GroupsDiv />
-            <CreateBill />
         </div>
     )
 }

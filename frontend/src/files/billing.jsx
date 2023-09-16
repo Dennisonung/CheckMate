@@ -24,9 +24,7 @@ const Billing = () => {
         <div>
             <div className="containerDiv">
                 <div id='textDiv'>
-
                     <h1> Create a New Bill</h1>
-
                     <h3 id='subheading'>Be sure all members splitting this bill have been selected on the Group page</h3>
                 </div>
 

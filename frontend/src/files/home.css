@@ -58,9 +58,14 @@ body {
   backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(20px);
   height: 60px;
-  width: 90%;
+  width: 100%;
   margin-bottom: 10px;
   border: none;
   border-radius: 12px;
   font-size: 24px;
+  margin-top: 20px;
+}
+.radioBtn {
+  margin-left: 50%;
+  margin-top: 5%;
 }
