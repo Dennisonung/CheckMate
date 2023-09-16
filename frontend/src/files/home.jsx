@@ -7,7 +7,7 @@ import axios from 'axios'
 const blankGroupData = {
     "group1": {
         "name": "",
-        "iconURL": "",
+        "iconURL": "https://www.google.com/url?sa=i&url=https%3A%2F%2Fwww.vecteezy.com%2Ffree-vector%2Fdefault-profile-picture&psig=AOvVaw1gATADA750RrliQZLHu2-z&ust=1694955307334000&source=images&cd=vfe&opi=89978449&ved=0CBAQjRxqFwoTCIDvvf2Wr4EDFQAAAAAdAAAAABAf",
         "balance": ""
     },
     "group2": {
@@ -38,11 +38,6 @@ const testGroupData = {
         "balance": "0.01"
     }
 }
-
-
-
-
-
 const GroupsDiv = () => {
     const [groupInfo, setGroupInfo] = useState(blankGroupData);
     const getGroupInfoPost = () => {
@@ -75,7 +70,6 @@ const GroupsDiv = () => {
     </>
     );
 }
-
 const Greeting = () => {
     const daysOfWeek = ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
     const emojis = ["👋", "🌞", "🙌", "👍", "🎉", "😊", "👋🏼", "😃", "🤗", "✨"];
@@ -106,14 +100,21 @@ const Greeting = () => {
 
 
 }
+const CreateBill = () => {
+    return (
+        <div id="createBillDiv">
 
+            <button id='createBill'> Create New Bill </button>
+        </div>
+    )
+}
 const Home = () => {
     return (
         <div id='home'>
             <Greeting />
             <Navbar />
             <GroupsDiv />
-
+            <CreateBill />
         </div>
     )
 }

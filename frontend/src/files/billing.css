@@ -1,74 +1,90 @@
 .containerDiv {
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    padding: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  padding: 30px;
+}
+#textDiv {
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.108);
+  padding: 10px;
+  padding-left: 20px;
+  border-radius: 14px;
 }
 
-.bold {
-    font-weight: 800;
+#subheading {
+  margin-top: 10px;
+  font-size: 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: flex-start;
 }
 
 .button {
-    color: #000000;
-    font-size: 24px;
-    border: solid 2px black;
-    border-radius: 10px;
-    width: 200px;
-    height: 50px;
+  color: #000000;
+  font-size: 24px;
+  border: solid 2px black;
+  border-radius: 10px;
+  width: 200px;
+  height: 50px;
 }
 
-.totalInput>.button:hover {
-    color: #fff;
+.totalInput > .button:hover {
+  color: #fff;
 }
 
 .button:hover {
-    color: #fff;
+  color: #fff;
 }
 
-.billDiv, .container {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    margin: 20px;
+.billDiv,
+.container {
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  margin: 20px;
 }
 
 .totalInput {
-    display: flex;
-    flex-direction: column;
-    gap: 15px;
-    font-size: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 15px;
+  font-size: 24px;
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.108);
+  padding: 20px;
+  border-radius: 14px;
 }
 
-.totalInput>input {
-    width: 200px;
-    height: 50px;
-    font-size: 36px;
-    color: black;
-    border-radius: 10px;
-    border: none;
+.totalInput > input {
+  width: 200px;
+  height: 50px;
+  font-size: 36px;
+  color: black;
+  border-radius: 10px;
+  border: none;
 }
 
-.totalInput>.button {
-    border-radius: 10px;
-    background-color: rgb(43, 190, 209);
-    color: #000000;
-    font-size: 24px;
-    border: solid 2px black;
+.totalInput > .button {
+  border-radius: 10px;
+  background-color: rgb(43, 190, 209);
+  color: #000000;
+  font-size: 24px;
+  border: solid 2px black;
 }
 
 .payeeList {
-    display: flex;
-    flex-direction: column;
-    gap: 10px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
 }
 
-.buttonDiv>.button {
-    background-color: rgb(46, 79, 179);
+.buttonDiv > .button {
+  background-color: rgb(46, 79, 179);
 }
 
 .buttonDiv {
-    display: flex;
-    justify-content: center;
-    align-items: flex-end;
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
 }

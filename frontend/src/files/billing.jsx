@@ -23,9 +23,12 @@ const Billing = () => {
     return (
         <div>
             <div className="containerDiv">
-                <h1>New Bill</h1>
+                <div id='textDiv'>
 
-                <h3 className='bold'>*** Be sure all members splitting this bill have been selected on the Group page</h3>
+                    <h1> Create a New Bill</h1>
+
+                    <h3 id='subheading'>Be sure all members splitting this bill have been selected on the Group page</h3>
+                </div>
 
                 <div className="billDiv">
 
@@ -51,7 +54,7 @@ const Billing = () => {
                 <div className="container">
 
                     <div className="summary">
-                    {total && <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total/divFactor)}</h3>}
+                        {total && <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total / divFactor)}</h3>}
                     </div>
 
                 </div>
