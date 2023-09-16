@@ -1,7 +1,7 @@
 module.exports = {
     name: 'users',
     description: 'user management module',
-    ErrorCodeRange: 100,
+    ErrorCodeRange: 200,
     run: async function (app, path, fs, sha512,Config) {   
         const User = require('../config/schema/user.js');
         const axios = require('axios');
