@@ -1,0 +1,68 @@
+.containerDiv {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 30px;
+}
+
+.bold {
+    font-weight: 800;
+}
+
+.button {
+    color: #000000;
+    font-size: 24px;
+    border: solid 2px black;
+    border-radius: 10px;
+    width: 200px;
+    height: 50px;
+}
+
+.totalInput>.button:hover {
+    color: #fff;
+}
+
+.button:hover {
+    color: #fff;
+}
+
+.billDiv, .container {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    margin: 20px;
+}
+
+.totalInput {
+    display: flex;
+    flex-direction: column;
+    gap: 15px;
+    font-size: 24px;
+}
+
+.totalInput>input {
+    width: 200px;
+    height: 50px;
+    font-size: 36px;
+    color: black;
+    border-radius: 10px;
+    border: none;
+}
+
+.totalInput>.button {
+    border-radius: 10px;
+    background-color: hotpink;
+    color: #000000;
+    font-size: 24px;
+    border: solid 2px black;
+}
+
+.payeeList {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.buttonDiv>.button {
+    background-color: blueviolet;
+}
