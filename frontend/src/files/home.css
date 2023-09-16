@@ -8,7 +8,40 @@ body {
     hsl(159deg 87% 19%) 100%
   );
   background-repeat: no-repeat;
-}
-/* backdrop-filter: blur(28px);
+  /* backdrop-filter: blur(28px);
   -webkit-backdrop-filter: blur(20px);
   background-color: rgba(255, 255, 255, 0.108); */
+}
+
+* {
+  color: #ffff;
+}
+
+#greeting {
+  margin: 30px;
+}
+
+#groups {
+  margin: 30px;
+}
+.groupDiv {
+  display: flex;
+  margin-top: 20px;
+  backdrop-filter: blur(28px);
+  -webkit-backdrop-filter: blur(20px);
+  background-color: rgba(255, 255, 255, 0.108);
+  padding: 10px;
+  border-radius: 14px;
+}
+.groupDivText {
+  margin-left: 40px;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-evenly;
+}
+
+.profilePic {
+  height: 70px;
+  width: 70px;
+  border-radius: 50px;
+}
