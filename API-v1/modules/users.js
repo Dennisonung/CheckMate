@@ -34,7 +34,8 @@ module.exports = {
                 // make a user by sending a post request with the email as the body http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client
 
                 axios.post('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client', {
-                    "email": email
+                    "name": FirstName + " " + LastName,
+                    "emailAddress": email
                 })
                 .then(function (response) {
                     console.log(response);
@@ -88,7 +89,7 @@ module.exports = {
                     return res.status(400).send("Bad Request");
                 }
 
-                
+
                 let sessionID = Math.floor(Math.random() * 10000000000000000);
                 while (fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + sessionID + ".json"))) {
                     sessionID = Math.floor(Math.random() * 10000000000000000);

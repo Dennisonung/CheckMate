@@ -1,7 +1,4 @@
-
-
 const mongoose = require('mongoose');
-
 const user = new mongoose.Schema({
     userId: String,
     userName: String,
@@ -13,5 +10,4 @@ const user = new mongoose.Schema({
     userBalance: Number,
     paymentMethods: [String]
 });
-
 module.exports = mongoose.model('User', user);
