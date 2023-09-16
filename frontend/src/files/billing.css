@@ -51,7 +51,7 @@
 
 .totalInput>.button {
     border-radius: 10px;
-    background-color: hotpink;
+    background-color: rgb(43, 190, 209);
     color: #000000;
     font-size: 24px;
     border: solid 2px black;
@@ -64,5 +64,11 @@
 }
 
 .buttonDiv>.button {
-    background-color: blueviolet;
+    background-color: rgb(46, 79, 179);
+}
+
+.buttonDiv {
+    display: flex;
+    justify-content: center;
+    align-items: flex-end;
 }

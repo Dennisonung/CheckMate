@@ -7,7 +7,8 @@ const Billing = () => {
 
     const [total, setTotal] = useState('')
 
-    const divFactor = 2;
+    const tempPeopleArry = ["john", "dennis", "sadik", "mohammed"]
+    const divFactor = tempPeopleArry.length
 
     const handleChange = e => {
         setTotal(e.target.value);
@@ -30,15 +31,18 @@ const Billing = () => {
 
                     <div className="totalInput">
                         <label htmlFor="total">Total Bill</label>
-                        <input type="text" id="total" onChange={handleChange} placeholder='$'/>
+                        <input type="number" id="total" onChange={handleChange} placeholder='$' />
                         <button className="button" onClick={handleClick}>Confirm</button>
                     </div>
 
                     <div className="payeeList">
                         <h2>Payee List:</h2>
                         <ul>
-                            <li></li>
-                            <li></li>
+                            {tempPeopleArry.map((p) => {
+                                <>
+                                    <li>hello</li>
+                                </>
+                            })}
                         </ul>
                     </div>
 
@@ -47,16 +51,17 @@ const Billing = () => {
                 <div className="container">
 
                     <div className="summary">
-                    <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total/divFactor)}</h3>
-                    </div>
-
-                    <div className="buttonDiv">
-                        <button className="button">
-                            Send
-                        </button>
+                    {total && <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total/divFactor)}</h3>}
                     </div>
 
                 </div>
+
+                <div className="buttonDiv">
+                    <button className="button">
+                        Send
+                    </button>
+                </div>
+
             </div>
 
             <Navbar />
