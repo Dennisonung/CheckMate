@@ -5,7 +5,7 @@ import ReactDOM from 'react-dom/client'
 import './App.css'
 import Home from './files/Home'
 import Groups from './files/Groups'
-import Billing from './files/Billing'
+import Billing from './files/billing'
 
 function App() {
   return <BrowserRouter>
