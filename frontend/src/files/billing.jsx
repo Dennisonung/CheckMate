@@ -4,7 +4,7 @@ import Navbar from './navbar'
 const Billing = () => {
     return (
         <div>
-            <h1>billing</h1>
+            <h1>Billing</h1>
             <Navbar />
         </div>
     )
