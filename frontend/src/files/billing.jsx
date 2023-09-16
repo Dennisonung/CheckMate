@@ -58,6 +58,7 @@ const Billing = () => {
 
                     <div className="summary">
                         {max && total && <h3>${total} split {divFactor} ways, each party pays ${Math.round(100 * total/divFactor)/100}</h3>}
+                        {!max && total && <h3>Total too high</h3>}
                     </div>
 
                 </div>
