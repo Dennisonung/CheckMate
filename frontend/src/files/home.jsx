@@ -69,8 +69,10 @@ const GroupsDiv = () => {
                         <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
                         <div className='groupDivText'>
                             <div className="form">
-                                <label className='label' for={groupInfo[key].name}>{groupInfo[key].name}</label>
-                                <input type='checkbox' id={groupInfo[key].name} value={groupInfo[key].name} className='checkbox'></input>
+                                <label className='label' >{groupInfo[key].name}
+                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox'></input>
+                                    <span className='checkmark'></span>
+                                </label>
                             </div>
                             <p>Balance: {groupInfo[key].balance}</p>
                         </div>
