@@ -33,12 +33,17 @@ body {
   background-color: rgba(255, 255, 255, 0.108);
   padding: 10px;
   border-radius: 14px;
+  align-items: center;
 }
 .groupDivText {
   margin-left: 40px;
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
+  align-items: center;
+}
+#groups p {
+  margin-top: 10px;
 }
 
 .profilePic {
@@ -50,7 +55,6 @@ body {
   width: 100%;
   display: flex;
   justify-content: center;
-  align-items: center;
 }
 
 #createBill {
@@ -67,5 +71,8 @@ body {
 }
 .radioBtn {
   margin-left: 50%;
-  margin-top: 5%;
+  border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
 }
