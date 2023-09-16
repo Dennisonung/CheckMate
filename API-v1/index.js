@@ -2,6 +2,7 @@ const express = require("express");
 const sha512 = require("js-sha512").sha512;
 const fs = require("fs");
 const path = require("path");
+require("./modules/startup.js").run(fs,path);
 const app = express();
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
@@ -11,7 +12,7 @@ const mongoose = require('mongoose');
 mongoose.connect(`mongodb+srv://checkmateAdmin:${Config.mongoosePassword}@cluster0.wag2biu.mongodb.net/`)
 	.then(() => console.log('Connected to MongoDB.'));
 global.forbidden = ["null","forbidden","fs"];
-const ForbiddenFiles = [];
+const ForbiddenFiles = ["startup.js"];
 let modules = fs.readdirSync("./modules");
 for (const i in modules) {
 	let file = modules[i];
