@@ -4,6 +4,7 @@ module.exports = {
     ErrorCodeRange: 100,
     run: async function (app, path, fs, sha512,Config) {   
         const User = require('../config/schema/user.js');
+        const axios = require('axios');
 
         //Register a new user
         app.post(api + "/NewUserRegister",async function (req, res) {
@@ -30,6 +31,19 @@ module.exports = {
                     userBalance: 0,
                     paymentMethods: []
                 });
+                // make a user by sending a post request with the email as the body http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client
+
+                axios.post('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client', {
+                    "email": email
+                })
+                .then(function (response) {
+                    console.log(response);
+                })
+                .catch(function (error) {
+                    console.log(error);
+                    return res.status(500).send("Internal Server Error");
+                });
+
         
                 await newUser.save().catch(e => {
                     console.log(`Failed to create user: ${e}`)
@@ -73,9 +87,9 @@ module.exports = {
                 if (user.userPassword !== sha512(password + Config.salt)) {
                     return res.status(400).send("Bad Request");
                 }
-                //create sessionID from random numbers up to 16 length and check if it exists in the database if so regenerate it
+
+                
                 let sessionID = Math.floor(Math.random() * 10000000000000000);
-                //check if sessionID exists in the nonpersistent/ActiveSessions folder
                 while (fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + sessionID + ".json"))) {
                     sessionID = Math.floor(Math.random() * 10000000000000000);
                 }
