@@ -11,4 +11,11 @@ const Home = () => {
     )
 }
 
+const Groups = () => {
+    const getGroupData = async () => { }
+
+
+}
+
+
 export default Home
