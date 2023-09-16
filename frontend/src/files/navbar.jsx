@@ -14,13 +14,13 @@ const Navbar = () => {
                 </div>
                 <div className="navbarItems">
                     <Link to="/billing" className='link'>
-                        billing
+                        Billing
                     </Link>
 
                 </div>
                 <div className="navbarItems">
                     <Link to="/groups" className='link'>
-                        group
+                        Group
                     </Link>
                 </div>
             </div>
