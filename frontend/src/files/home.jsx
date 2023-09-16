@@ -68,13 +68,12 @@ const GroupsDiv = () => {
                     <div key={key} className="groupDiv">
                         <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
                         <div className='groupDivText'>
-                            <h2>{groupInfo[key].name}</h2>
+                            <div className="form">
+                                <label className='label' for={groupInfo[key].name}>{groupInfo[key].name}</label>
+                                <input type='checkbox' id={groupInfo[key].name} value={groupInfo[key].name} className='checkbox'></input>
+                            </div>
                             <p>Balance: {groupInfo[key].balance}</p>
                         </div>
-                        <button onClick={() => {
-                            handleCreateBill({ info: groupInfo[key] });
-
-                        }} className="radioBtn"></button>
                     </div>
                 ))}
                 <div id="createBillDiv">
