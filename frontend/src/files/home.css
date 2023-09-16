@@ -1,0 +1,11 @@
+body {
+  background-image: linear-gradient(
+    45deg,
+    hsl(230deg 100% 20%) 0%,
+    hsl(215deg 100% 23%) 25%,
+    hsl(203deg 100% 21%) 50%,
+    hsl(182deg 100% 16%) 75%,
+    hsl(159deg 87% 19%) 100%
+  );
+  background-repeat: no-repeat;
+}

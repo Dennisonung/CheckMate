@@ -1,0 +1,29 @@
+* {
+  text-decoration: none;
+  padding: 0%;
+  margin: 0%;
+}
+#navbarDiv {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+
+  position: fixed;
+  bottom: 0;
+}
+#navbar {
+  width: 98%;
+  display: flex;
+  justify-content: space-around;
+  align-items: center;
+  background-color: black;
+  height: 60px;
+  border-radius: 14px;
+  color: white;
+  margin-bottom: 5px;
+}
+.link {
+  text-decoration: none;
+  color: white;
+}
