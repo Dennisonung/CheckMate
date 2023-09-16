@@ -39,18 +39,11 @@ const testGroupData = {
     }
 }
 
-const Home = () => {
-    return (
-        <div id='home'>
-            <Greeting />
-            <Navbar />
-            <Groups />
 
-        </div>
-    )
-}
 
-const Groups = () => {
+
+
+const GroupsDiv = () => {
     const [groupInfo, setGroupInfo] = useState(blankGroupData);
     const getGroupInfoPost = () => {
         axios.post('http://localhost:3000/home', {})
@@ -67,7 +60,7 @@ const Groups = () => {
         setGroupInfo(testGroupData);
     }, 2000);
 
-    return (
+    return (<>
         <div id='groups'>
             {Object.keys(groupInfo).map((key) => (
                 <div key={key} className="groupDiv">
@@ -79,6 +72,7 @@ const Groups = () => {
                 </div>
             ))}
         </div>
+    </>
     );
 }
 
@@ -113,5 +107,18 @@ const Greeting = () => {
 
 }
 
+const Home = () => {
+    return (
+        <div id='home'>
+            <Greeting />
+            <Navbar />
+            <GroupsDiv />
 
-export default Home
+        </div>
+    )
+}
+
+export {
+    GroupsDiv
+}
+export default Home;

@@ -2,6 +2,7 @@ import ReactDOM from 'react-dom/client'
 import Navbar from './navbar'
 import axios from 'axios'
 import { React, useState } from 'react'
+import { GroupsDiv } from './home'
 
 
 const blankGroupData = {
@@ -49,41 +50,6 @@ const Groups = () => {
         </div>
     )
 }
-
-
-
-const GroupsDiv = () => {
-    const [groupInfo, setGroupInfo] = useState(blankGroupData);
-    const getGroupInfoPost = () => {
-        axios.post('http://localhost:3000/home', {})
-            .then(response => {
-
-                setGroupInfo(response.data);
-            })
-            .catch(error => {
-
-                console.error('Error:', error);
-            })
-    }
-    setTimeout(() => {
-        setGroupInfo(testGroupData);
-    }, 2000);
-
-    return (
-        <div id='groups'>
-            {Object.keys(groupInfo).map((key) => (
-                <div key={key} className="groupDiv">
-                    <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
-                    <div className='groupDivText'>
-                        <h2>{groupInfo[key].name}</h2>
-                        <p>Balance: {groupInfo[key].balance}</p>
-                    </div>
-                </div>
-            ))}
-        </div>
-    );
-}
-
 
 
 
