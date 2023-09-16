@@ -3,8 +3,8 @@ import { BrowserRouter, Route, Routes } from 'react-router-dom';
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import './App.css'
-import Home from './files/Home'
-import Groups from './files/Groups'
+import Home from './files/home.jsx'
+import Groups from './files/groups.jsx'
 import Billing from './files/billing'
 
 function App() {

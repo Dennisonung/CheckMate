@@ -27,17 +27,10 @@ const Billing = () => {
     return (
         <div>
             <div className="containerDiv">
-<<<<<<< Updated upstream
                 <div id='textDiv'>
                     <h1> Create a New Bill</h1>
                     <h3 id='subheading'>Be sure all members splitting this bill have been selected on the Group page</h3>
                 </div>
-=======
-                <h1>New Bill</h1>
-
-                <h3 className='bold'>*** Be sure all members splitting this bill have been selected on the Home page</h3>
->>>>>>> Stashed changes
-
                 <div className="billDiv">
 
                     <div className="totalInput">
@@ -64,11 +57,7 @@ const Billing = () => {
                 <div className="container">
 
                     <div className="summary">
-<<<<<<< Updated upstream
-                        {total && <h3>${total} split {divFactor} ways, each party pays ${Math.ceil(total / divFactor)}</h3>}
-=======
                         {max && total && <h3>${total} split {divFactor} ways, each party pays ${Math.round(100 * total/divFactor)/100}</h3>}
->>>>>>> Stashed changes
                     </div>
 
                 </div>

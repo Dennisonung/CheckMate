@@ -7,17 +7,17 @@ let billUsers = []
 
 const blankGroupData = [
     {
-        "name": "Getting there info",
+        "name": "Getting their info",
         "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
         "balance": "0.00"
     },
     {
-        "name": "Getting there info",
+        "name": "Getting their info",
         "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
         "balance": "0.00"
     },
     {
-        "name": "Getting there info",
+        "name": "Getting their info",
         "iconURL": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
         "balance": "0.00"
     }
