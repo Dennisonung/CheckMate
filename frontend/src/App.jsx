@@ -59,6 +59,9 @@ function App() {
   return <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home userInfo={groupInfo} />} />
+<BrowserRouter>
+    <Routes>
+      <Route path="/" element={<Home />} />
       <Route path="/groups" element={<Groups />} />
       <Route path='/billing' element={<Billing />} />
     </Routes>
