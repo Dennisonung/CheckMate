@@ -1,8 +1,11 @@
-import { React, useState } from 'react'
+import { React, useState, useContext } from 'react'
 import ReactDOM from 'react-dom/client'
 import Navbar from './navbar'
 import "./home.css"
 import axios from 'axios'
+import { GroupContext } from '../contexts/GroupContext'
+
+
 let billUsers = []
 
 const blankGroupData = [
@@ -43,6 +46,7 @@ const GroupsDiv = () => {
     const [groupInfo, setGroupInfo] = useState(blankGroupData);
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false)
+    const [people, setPeople] = useState([])
     const getGroupInfoPost = () => {
         axios.post('http://localhost:3000/home', {})
             .then(response => {
@@ -65,17 +69,12 @@ const GroupsDiv = () => {
     var group = []
 
     const handleChange = (p) => {
-
-       console.log(group)
-
        if (group.includes(p)) {
         group = group.filter(e => e !== p);
        } else {
         group.push(p)
        }
-
-       console.log(group)
-    }
+    } 
 
     return (
         <>
@@ -86,7 +85,7 @@ const GroupsDiv = () => {
                         <div className='groupDivText'>
                             <form className="form">
                                 <label className='label' >{groupInfo[key].name}
-                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange = {()=> handleChange(groupInfo[key])}></input>
+                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange = {() => handleChange(groupInfo[key])}></input>
                                     <span className='checkmark'></span>
                                 </label>
                             </form>
