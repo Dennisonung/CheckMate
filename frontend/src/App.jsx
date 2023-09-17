@@ -69,7 +69,7 @@ function App() {
 
   return <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home balance={balance} userInfo={userInfo} />} />
+      <Route path="/" element={<Home balance={balance} userInfo={Info} />} />
       <Route path="/groups" element={<Groups />} />
       <Route path='/billing' element={<Billing />} />
     </Routes>
