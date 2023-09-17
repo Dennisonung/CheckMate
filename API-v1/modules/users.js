@@ -59,50 +59,34 @@ module.exports = {
                 return res.status(500).send("Internal Server Error");
             }
         });
-
-        //Login a user
         app.post(api + "/UserLogin",async function (req, res) {
             console.log("API has been Accessed from /api/v1/UserLogin and the IP is " + req.ip);
             try {
                 const username = req.body.username;
                 const password = req.body.password;
                 const email = req.body.email;
-
-                if (!username || !password || !email) {
-                    return res.status(400).send("Bad Request");
-                }
-
+                if (!username || !password || !email) return res.status(400).send("Bad Request");
                 const user = await User.findOne({ userName: username }).catch(e => {
                     console.log(`Failed to find user: ${e}`)
                     return res.status(400).send("Bad Request")
                 });
-
-                if (!user) {
-                    return res.status(400).send("Bad Request");
-                }
-
-                if (user.userPassword !== sha512(password + Config.salt)) {
-                    return res.status(400).send("Bad Request");
-                }
-
-
+                if (!user) return res.status(400).send("Bad Request");
+                if (user.userPassword !== sha512(password + Config.salt)) return res.status(400).send("Bad Request");
+                
                 let sessionID = Math.floor(Math.random() * 10000000000000000);
                 while (fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + sessionID + ".json"))) {
                     sessionID = Math.floor(Math.random() * 10000000000000000);
                 }
-                //read all filenames in activesessions folder and find the one with the same username
-                
-                //create session file
                 fs.writeFileSync(path.join(__dirname, "../nonpersistent/ActiveSessions/"+username+"-"+sessionID + ".json"), JSON.stringify({
                     "userID": user.userID,
                     "userName": user.userName,
                 }));
-                //send sessionID to user
+                res.cookie('sessionID', sessionID, { expires: new Date(Date.now() + 604800), httpOnly: true })
+                res.cookie('userID', user.userID, { expires: new Date(Date.now() + 604800), httpOnly: true })
                 res.status(200).send({
                     "success": true,
                     "userID" : user.userID,
                     "userName" : username,
-                    "sessionID" : sessionID
                 });
             } catch (err) {
                 console.log(err);
