@@ -23,22 +23,6 @@ const GroupsDiv = ({ userInfo }) => {
         console.log(info);
     }
     const handleSubmit = () => { }
-
-    var group = []
-
-    const handleChange = (p) => {
-
-       console.log(group)
-
-       if (group.includes(p)) {
-        group = group.filter(e => e !== p);
-       } else {
-        group.push(p)
-       }
-
-       console.log(group)
-    }
-
     return (
         <>
             <div id='groups'>
@@ -46,14 +30,13 @@ const GroupsDiv = ({ userInfo }) => {
                     <div key={key} className="groupDiv">
                         <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
                         <div className='groupDivText'>
-                            <form className="form">
-                                <label className='label' >{groupInfo[key].name}
-                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange = {()=> handleChange(groupInfo[key])}></input>
-                                    <span className='checkmark'></span>
-                                </label>
-                            </form>
+                            <h2>{groupInfo[key].name}</h2>
                             <p>Balance: {groupInfo[key].balance}</p>
                         </div>
+                        <button onClick={() => {
+                            handleCreateBill({ info: groupInfo[key] });
+
+                        }} className="radioBtn"></button>
                     </div>
                 ))}
                 <div id="createBillDiv">
