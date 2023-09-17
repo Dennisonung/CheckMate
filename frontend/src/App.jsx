@@ -56,20 +56,9 @@ function App() {
       })
   }
 
-  const [balance, setBalance] = useState(29);
-  const getBalance = () => {
-    axios.post('http://localhost:3000/api/balance', {})
-      .then(response => {
-        setBalance(response.data);
-      })
-      .catch(error => {
-        console.error('Error:', error);
-      })
-  }
-
   return <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home balance={balance} userInfo={Info} />} />
+      <Route path="/" element={<Home userInfo={groupInfo} />} />
       <Route path="/groups" element={<Groups />} />
       <Route path='/billing' element={<Billing />} />
     </Routes>

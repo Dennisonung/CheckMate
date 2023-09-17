@@ -77,7 +77,17 @@ return (
 );
 
 
-const BalanceCom = ({ balance }) => {
+const BalanceCom = () => {
+    const [balance, setBalance] = useState(29);
+    const getBalance = () => {
+        axios.post('http://localhost:3000/api/balance', {})
+            .then(response => {
+                setBalance(response.data);
+            })
+            .catch(error => {
+                console.error('Error:', error);
+            })
+    }
     return (
         <div id='balance'> <h1> balance: {balance}CAD</h1> </div>
     )
@@ -119,7 +129,7 @@ const Home = ({ userInfo, balance }) => {
             <div id='home'>
                 <Greeting />
                 <div id="mainGroupDiv">
-                    <BalanceCom balance={balance} />
+                    <BalanceCom />
                     <GroupsDiv userInfo={userInfo} />
                 </div>
             </div>
