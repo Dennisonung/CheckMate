@@ -3,7 +3,7 @@ import Navbar from './navbar'
 import './billing.css'
 import { useState } from 'react'
 
-const Billing = ({ groupInfo }) => {
+const Billing = ({groupInfo}) => {
 
     const [total, setTotal] = useState('')
 
@@ -43,9 +43,9 @@ const Billing = ({ groupInfo }) => {
                         <h2>Payee List:</h2>
                         <div className="payeeContainer">
                             <ul>
-                                {tempPeopleArray.map(p => {
+                                {groupInfo.map(p => {
                                     return (
-                                        <li key={p.id}>{p.name}</li>
+                                        <li key={Math.random()}>{p.name}</li>
                                     )
                                 })}
                             </ul>

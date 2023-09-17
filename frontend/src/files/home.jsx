@@ -6,7 +6,7 @@ import axios from 'axios'
 let billUsers = []
 
 
-const GroupsDiv = ({ groupInfo }) => {
+const GroupsDiv = (groupInfo) => {
 
 
     const [selectedGroup, setSelectedGroup] = useState(null);
