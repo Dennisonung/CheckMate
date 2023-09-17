@@ -12,8 +12,6 @@ const GroupsDiv = ({ groupInfo }) => {
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false)
 
-
-
     function handleCreateBill({ info }) {
         console.log(info);
     }

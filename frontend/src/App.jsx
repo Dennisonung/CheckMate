@@ -6,6 +6,7 @@ import './App.css'
 import Home from './files/home.jsx'
 import Groups from './files/groups.jsx'
 import Billing from './files/billing'
+import axios from 'axios';
 
 function App() {
   const blankGroupData = [
@@ -46,11 +47,9 @@ function App() {
   const getGroupInfoPost = () => {
     axios.post('http://localhost:3000/home', {})
       .then(response => {
-
         setGroupInfo(response.data);
       })
       .catch(error => {
-
         console.error('Error:', error);
       })
   }
@@ -58,13 +57,15 @@ function App() {
     setGroupInfo(testGroupData);
   }, 2000);
 
-  return <BrowserRouter>
+  return (
+  <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home groupInfo={groupInfo} />} />
       <Route path="/groups" element={<Groups />} />
       <Route path='/billing' element={<Billing groupInfo={groupInfo} />} />
     </Routes>
   </BrowserRouter>
+  )
 }
 
 export default App
