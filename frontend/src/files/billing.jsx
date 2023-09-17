@@ -3,14 +3,14 @@ import Navbar from './navbar'
 import './billing.css'
 import { useState } from 'react'
 
-const Billing = () => {
+const Billing = ({ groupInfo }) => {
 
     const [total, setTotal] = useState('')
 
     const tempPeopleArray = [
-        {"name":"john", "id": 1},
-        {"name": "dennis", "id": 2},
-        {"name": "sidak", "id": 3}
+        { "name": "john", "id": 1 },
+        { "name": "dennis", "id": 2 },
+        { "name": "sidak", "id": 3 }
     ]
     const divFactor = tempPeopleArray.length
 
@@ -22,7 +22,7 @@ const Billing = () => {
         e.preventDefault();
     }
 
-    var max = (total > 3000)? false : true
+    var max = (total > 3000) ? false : true
 
     return (
         <div>
@@ -57,7 +57,7 @@ const Billing = () => {
                 <div className="container">
 
                     <div className="summary">
-                        {max && total && <h3>${total} split {divFactor} ways, each party pays ${Math.round(100 * total/divFactor)/100}</h3>}
+                        {max && total && <h3>${total} split {divFactor} ways, each party pays ${Math.round(100 * total / divFactor) / 100}</h3>}
                         {!max && total && <h3>Total too high</h3>}
                     </div>
 
