@@ -56,12 +56,10 @@ function App() {
       })
   }
 
-  return <BrowserRouter>
+  return
+  <BrowserRouter>
     <Routes>
-      <Route path="/" element={<Home userInfo={groupInfo} />} />
-<BrowserRouter>
-    <Routes>
-      <Route path="/" element={<Home />} />
+    <Route path="/" element={<Home userInfo={groupInfo} />} />
       <Route path="/groups" element={<Groups />} />
       <Route path='/billing' element={<Billing />} />
     </Routes>
