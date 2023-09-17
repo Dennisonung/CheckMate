@@ -63,6 +63,7 @@ const GroupsDiv = ({ userInfo }) => {
 
     </>
 );
+}
 
 
 const BalanceCom = () => {
