@@ -28,50 +28,38 @@ const GroupsDiv = ({ userInfo }) => {
 
     const handleChange = (p) => {
 
+       console.log(group)
 
-        console.log(group)
-
-        if (group.includes(p)) {
-            group = group.filter(e => e !== p);
-        } else {
-            group.push(p)
-        }
-
-        console.log(group)
-    }
-
-    if (group.includes(p)) {
+       if (group.includes(p)) {
         group = group.filter(e => e !== p);
-    } else {
+       } else {
         group.push(p)
+       }
+
+       console.log(group)
     }
-}
 
-return (
-    <>
-        <div id='groups'>
-            {Object.keys(groupInfo).map((key) => (
-                <div key={key} className="groupDiv">
-                    <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
-                    <div className='groupDivText'>
-                        <form className="form">
-                            <label className='label' >{groupInfo[key].name}
-
-                                <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange={() => handleChange(groupInfo[key])}></input>
-
-                                <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange={() => handleChange(groupInfo[key])}></input>
-
-                                <span className='checkmark'></span>
-                            </label>
-                        </form>
-                        <p>Balance: {groupInfo[key].balance}</p>
+    return (
+        <>
+            <div id='groups'>
+                {Object.keys(groupInfo).map((key) => (
+                    <div key={key} className="groupDiv">
+                        <img src={groupInfo[key].iconURL} alt={`Icon for ${groupInfo[key].name}`} className="profilePic" />
+                        <div className='groupDivText'>
+                            <form className="form">
+                                <label className='label' >{groupInfo[key].name}
+                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange = {()=> handleChange(groupInfo[key])}></input>
+                                    <span className='checkmark'></span>
+                                </label>
+                            </form>
+                            <p>Balance: {groupInfo[key].balance}</p>
+                        </div>
                     </div>
+                ))}
+                <div id="createBillDiv">
+                    <button id='createBill' onClick={handleSubmit} > Create New Bill </button>
                 </div>
-            ))}
-            <div id="createBillDiv">
-                <button id='createBill' onClick={handleSubmit} > Create New Bill </button>
             </div>
-        </div>
 
     </>
 );

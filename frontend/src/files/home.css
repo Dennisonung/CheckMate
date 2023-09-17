@@ -51,9 +51,8 @@ body {
   display: flex;
   flex-direction: column;
   justify-content: space-evenly;
-  align-items: flex-start;
+  align-items: center;
 }
-
 #groups p {
   margin-top: 10px;
 }
@@ -81,21 +80,12 @@ body {
   font-size: 24px;
   margin-top: 20px;
 }
-
-.label {
-  font-size: 20px;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-}
-
-.checkmark {
-  top: 0;
-  left: 0;
-  height: 25px;
-  width: 25px;
-  background-color: #eee;
+.radioBtn {
+  margin-left: 50%;
   border-radius: 50%;
+  border: none;
+  height: 30px;
+  width: 30px;
 }
 
 .label > input {
