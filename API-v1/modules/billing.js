@@ -10,12 +10,6 @@ module.exports = {
         const axios = require('axios');
         app.post(api + "/PayGroupBill",async function (req, res) {
             console.log("API has been Accessed from /api/v1/ and the IP is " + req.ip);
-            //Charge selected group members
-            //Requires a groupID, multiple userID, and a sessionID
-            //Returns a 200 if successful
-            //Returns a 400 if bad request
-            //Returns a 403 if forbidden
-            //Returns a 500 if internal server error
             try {
                 let userID = req.cookies.userID;
                 let sessionID = req.cookies.sessionID;
@@ -30,18 +24,15 @@ module.exports = {
                 }
                 if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
                 let groupID = req.body.groupID;
-                let groupMembers = req.body.groupMembers; //array of userIDs
+                let groupMembers = req.body.groupMembers;
                 let billAmount = req.body.billAmount;
                 let billDescription = req.body.billDescription;
                 let billID = sha512(groupID + billAmount + Config.salt);
                 let splitAmount = req.body.splitAmount;
-
-                //check if group exists
+                if (!groupID || !groupMembers || !billAmount || !billDescription || !billID || !splitAmount) return res.status(400).send("Bad Request");
                 let group = Group.findOne({groupID: groupID});
-                if (group == null) {
-                    return res.status(400).send("Bad Request");
-                }
-                //check if users is in group
+                if (group == null) return res.status(400).send("Bad Request");
+        
                 for (let i = 0; i < groupMembers.length; i++) {
                     user = User.findOne({userID: groupMembers[i]});
                     if (user == null) {
@@ -55,7 +46,7 @@ module.exports = {
                 }
 
 
-                //charge users
+                //Send invoice to each checked users
                 for (let i = 0; i < groupMembers.length; i++) {
                     user = User.findOne({userID: groupMembers[i]});
                     axios.get('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client?email=' +  user.email).then((res) => {
@@ -69,13 +60,13 @@ module.exports = {
 
                     });
                 }
-                return res.status(200).send("OK");
-
+                return res.sendStatus(200);
             } catch (err) {
                 console.log(err);
                 return res.status(500).send("Internal Server Error");
             }
         });
+
         app.get(api + "/getBalance",async function (req, res) {
             console.log("API has been Accessed from /api/v1/getBalance and the IP is " + req.ip);
             let userID = req.cookies.userID;
