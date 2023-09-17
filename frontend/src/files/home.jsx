@@ -3,7 +3,6 @@ import ReactDOM from 'react-dom/client'
 import Navbar from './navbar'
 import "./home.css"
 import axios from 'axios'
-import { GroupContext } from '../contexts/GroupContext'
 
 
 let billUsers = []
