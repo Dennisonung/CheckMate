@@ -41,6 +41,7 @@ const testGroupData = [
 ]
 const GroupsDiv = () => {
     const [groupInfo, setGroupInfo] = useState(blankGroupData);
+
     const [selectedGroup, setSelectedGroup] = useState(null);
     const [buttonClicked, setButtonClicked] = useState(false)
     const getGroupInfoPost = () => {
@@ -54,6 +55,7 @@ const GroupsDiv = () => {
                 console.error('Error:', error);
             })
     }
+
     setTimeout(() => {
         setGroupInfo(testGroupData);
     }, 2000);
@@ -66,15 +68,15 @@ const GroupsDiv = () => {
 
     const handleChange = (p) => {
 
-       console.log(group)
+        console.log(group)
 
-       if (group.includes(p)) {
-        group = group.filter(e => e !== p);
-       } else {
-        group.push(p)
-       }
+        if (group.includes(p)) {
+            group = group.filter(e => e !== p);
+        } else {
+            group.push(p)
+        }
 
-       console.log(group)
+        console.log(group)
     }
 
     return (
@@ -86,7 +88,7 @@ const GroupsDiv = () => {
                         <div className='groupDivText'>
                             <form className="form">
                                 <label className='label' >{groupInfo[key].name}
-                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange = {()=> handleChange(groupInfo[key])}></input>
+                                    <input type='checkbox' value={groupInfo[key].name} className='checkbox' onChange={() => handleChange(groupInfo[key])}></input>
                                     <span className='checkmark'></span>
                                 </label>
                             </form>
@@ -102,6 +104,22 @@ const GroupsDiv = () => {
         </>
     );
 
+}
+const BalanceCom = () => {
+    const [balance, setBalance] = useState(99);
+    const getBalance = () => {
+        axios.post('http://localhost:3000/api/balance', {})
+            .then(response => {
+                setBalance(response.data);
+            })
+            .catch(error => {
+
+                console.error('Error:', error);
+            })
+    }
+    return (
+        <div id='balance'> <h1> balance: {balance}CAD</h1> </div>
+    )
 }
 
 
@@ -137,11 +155,17 @@ const Greeting = () => {
 }
 const Home = () => {
     return (
-        <div id='home'>
-            <Greeting />
+        <>
+            <div id='home'>
+                <Greeting />
+                <div id="mainGroupDiv">
+                    <BalanceCom />
+                    <GroupsDiv />
+
+                </div>
+            </div>
             <Navbar />
-            <GroupsDiv />
-        </div>
+        </>
     )
 }
 
