@@ -61,7 +61,7 @@ function App() {
   <BrowserRouter>
     <Routes>
       <Route path="/" element={<Home groupInfo={groupInfo} />} />
-      <Route path="/groups" element={<Groups />} />
+      <Route path="/groups" element={<Groups groupInfo={groupInfo}/>} />
       <Route path='/billing' element={<Billing groupInfo={groupInfo} />} />
     </Routes>
   </BrowserRouter>

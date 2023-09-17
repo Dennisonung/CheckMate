@@ -6,11 +6,7 @@ import axios from 'axios'
 let billUsers = []
 
 
-const GroupsDiv = (groupInfo) => {
-
-
-    const [selectedGroup, setSelectedGroup] = useState(null);
-    const [buttonClicked, setButtonClicked] = useState(false)
+const GroupsDiv = ({groupInfo}) => {
 
     function handleCreateBill({ info }) {
         console.log(info);
@@ -71,7 +67,7 @@ const BalanceCom = () => {
             })
     }
     return (
-        <div id='balance'> <h1> balance: {balance}CAD</h1> </div>
+        <div id='balance'> <h1> Balance: {balance}CAD</h1> </div>
     )
 }
 
@@ -106,7 +102,7 @@ const Greeting = () => {
 
 
 }
-const Home = ({ groupInfo }) => {
+const Home = ({groupInfo}) => {
     return (
         <>
             <div id='home'>

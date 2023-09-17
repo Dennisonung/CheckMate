@@ -42,14 +42,14 @@ const testGroupData = {
 }
 
 
-const Groups = () => {
+const Groups = ({groupInfo}) => {
     return (
         <div>
             <div id="textDiv">
                 <h1>Groups Page</h1>
             </div>
             <Navbar />
-            <GroupsDiv />
+            <GroupsDiv groupInfo={groupInfo}/>
         </div>
     )
 }
