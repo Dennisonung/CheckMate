@@ -16,10 +16,7 @@ module.exports = {
                 const email = req.body.email;
                 const FirstName = req.body.FirstName;
                 const LastName = req.body.LastName;
-
-                if (!username || !password || !email || !FirstName || !LastName) {
-                    return res.status(400).send("Bad Request");
-                }
+                if (!username || !password || !email || !FirstName || !LastName) return res.status(400).send("Bad Request");
                 let newUserID = sha512(username + Config.salt)
                 const newUser = new User({
                     userID: newUserID,
@@ -36,19 +33,11 @@ module.exports = {
                     "name": FirstName + " " + LastName,
                     "emailAddress": email
                 }).catch(e => {});
-
-                if (await User.findOne({ username: username })) {
-                    return res.status(400).send("Bad Request");
-                }
-
-                if (await User.findOne({ email: email })) { 
-                    return res.status(400).send("Bad Request");
-                }
-
+                if (await User.findOne({ username: username })) return res.status(400).send("Bad Request");
+                if (await User.findOne({ email: email })) return res.status(400).send("Bad Request");
                 await newUser.save().catch(e => {
                     return res.status(500).send("Internal Server Error");
                 });
-
                 res.status(200).send({
                     "success": true,
                     "userID" : newUserID,

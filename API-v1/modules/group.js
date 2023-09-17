@@ -8,7 +8,6 @@ module.exports = {
         const user = require('../config/schema/user.js');
         const axios = require('axios');
 
-
         app.get(api + "/groups/list",async function (req, res) {
             console.log("API has been Accessed from /api/v1/groups/list and the IP is " + req.ip);
             try {
@@ -52,18 +51,76 @@ module.exports = {
         });
         app.get(api + "/groups/join",async function (req, res) {
             console.log("API has been Accessed from /api/v1/groups/join and the IP is " + req.ip);
-            //accepts a group invitation.
-            //requires a groupID and a userID
-            //returns a 200 if successful
-            //returns a 400 if bad request
-            //returns a 500 if internal server error
+            let userID = req.cookies.userID;
+            let sessionID = req.cookies.sessionID;
+            if (!userID || !sessionID) return res.status(400).send("Bad Request");
+            if (forbidden.includes(userID) || forbidden.includes(sessionID)) return res.status(403).send("Forbidden");
+            let username;
+            let usersearch = await User.findOne({userID: userID});
+            if (usersearch == null) {
+                return res.status(400).send("Bad Request");
+            } else {
+                username = usersearch.userName; 
+            }
+            if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
+            
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         });
         app.post(api + "/groups/create",async function (req, res) {
             console.log("API has been Accessed from /api/v1/groups/create and the IP is " + req.ip);
+            let userID = req.cookies.userID;
+            let sessionID = req.cookies.sessionID;
+            if (!userID || !sessionID) return res.status(400).send("Bad Request");
+            if (forbidden.includes(userID) || forbidden.includes(sessionID)) return res.status(403).send("Forbidden");
+            let username;
+            let usersearch = await User.findOne({userID: userID});
+            if (usersearch == null) {
+                return res.status(400).send("Bad Request");
+            } else {
+                username = usersearch.userName; 
+            }
+            if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
+
+
+
+
+
 
         });
         app.post(api + "/groups/createInvite",async function (req, res) {
             console.log("API has been Accessed from /api/v1/groups/createInvite and the IP is " + req.ip);
+            let userID = req.cookies.userID;
+            let sessionID = req.cookies.sessionID;
+            if (!userID || !sessionID) return res.status(400).send("Bad Request");
+            if (forbidden.includes(userID) || forbidden.includes(sessionID)) return res.status(403).send("Forbidden");
+            let username;
+            let usersearch = await User.findOne({userID: userID});
+            if (usersearch == null) {
+                return res.status(400).send("Bad Request");
+            } else {
+                username = usersearch.userName; 
+            }
+            if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
+
+
+
+
+
+
+
 
         });
 

@@ -1,3 +1,4 @@
+const user = require('../config/schema/user.js');
 
 module.exports = {
     name: 'Billing',
@@ -5,31 +6,73 @@ module.exports = {
     ErrorCodeRange: "300",
     run: async function (app, path, fs, sha512,Config) {   
         const User = require('../config/schema/user.js');
-        app.get(api + "/",async function (req, res) {
+        const Group = require('../config/schema/group.js');
+        const axios = require('axios');
+        app.post(api + "/PayGroupBill",async function (req, res) {
             console.log("API has been Accessed from /api/v1/ and the IP is " + req.ip);
-            //accepts a group invitation.
-            //requires a groupID and a userID
-            //returns a 200 if successful
-            //returns a 400 if bad request
-            //returns a 500 if internal server error
-        });
-        app.post(api + "/getBalance",async function (req, res) {
-            console.log("API has been Accessed from /api/v1/ and the IP is " + req.ip);
-            //get sessionID and userID from cookies
-            //check if sessionID is valid
-            //check if userID is valid
-            //return balance
+            try {
+                let userID = req.cookies.userID;
+                let sessionID = req.cookies.sessionID;
+                if (!userID || !sessionID) return res.status(400).send("Bad Request");
+                if (forbidden.includes(userID) || forbidden.includes(sessionID)) return res.status(403).send("Forbidden");
+                let username;
+                let usersearch = await User.findOne({userID: userID});
+                if (usersearch == null) {
+                    return res.status(400).send("Bad Request");
+                } else {
+                    username = usersearch.userName; 
+                }
+                if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
+                let groupID = req.body.groupID;
+                let groupMembers = req.body.groupMembers;
+                let billAmount = req.body.billAmount;
+                let billDescription = req.body.billDescription;
+                let billID = sha512(groupID + billAmount + Config.salt);
+                let splitAmount = req.body.splitAmount;
+                if (!groupID || !groupMembers || !billAmount || !billDescription || !billID || !splitAmount) return res.status(400).send("Bad Request");
+                let group = Group.findOne({groupID: groupID});
+                if (group == null) return res.status(400).send("Bad Request");
+        
+                for (let i = 0; i < groupMembers.length; i++) {
+                    user = User.findOne({userID: groupMembers[i]});
+                    if (user == null) {
+                        i = groupMembers.length + 1;
+                        return res.status(400).send("Forbidden");
+                    }
+                    if(!user.userGroups.includes(groupID)) {
+                        i = groupMembers.length + 1;
+                        return res.status(400).send("Forbidden");
+                    }
+                }
 
+
+                //Send invoice to each checked users
+                for (let i = 0; i < groupMembers.length; i++) {
+                    user = User.findOne({userID: groupMembers[i]});
+                    axios.get('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/client?email=' +  user.email).then((res) => {
+                        axios.post('http://money-request-app.canadacentral.cloudapp.azure.com:8080/api/v1/request', {
+                            "expirationDate": Date.now(),
+                            "amount": splitAmount[i],
+                            "requesteeId": res.data.id,
+                            "invoiceNumber": billID,
+                            "message": billDescription
+                        }).catch(e => {});
+
+                    });
+                }
+                return res.sendStatus(200);
+            } catch (err) {
+                console.log(err);
+                return res.status(500).send("Internal Server Error");
+            }
+        });
+
+        app.get(api + "/getBalance",async function (req, res) {
+            console.log("API has been Accessed from /api/v1/getBalance and the IP is " + req.ip);
             let userID = req.cookies.userID;
             let sessionID = req.cookies.sessionID;
-            if (!userID || !sessionID) {
-                return res.status(400).send("Bad Request");
-            }
-
-            if (forbidden.includes(userID) || forbidden.includes(sessionID)) {
-                return res.status(403).send("Forbidden");
-            }
-            //check if user exists
+            if (!userID || !sessionID) return res.status(400).send("Bad Request");
+            if (forbidden.includes(userID) || forbidden.includes(sessionID)) return res.status(403).send("Forbidden");
             let username;
             let usersearch = await User.findOne({userID: userID});
             if (usersearch == null) {
@@ -37,12 +80,7 @@ module.exports = {
             } else {
                 username = usersearch.userName; 
             }
-            //check if session exists
-            console.log( username + "-" + sessionID + ".json")
-            if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) {
-                return res.status(403).send("Forbidden");
-            }
-
+            if (!fs.existsSync(path.join(__dirname, "../nonpersistent/ActiveSessions/" + username + "-" + sessionID + ".json"))) return res.status(403).send("Forbidden");
             let balance;
             if (usersearch.userBalance.toString().includes(".")) {
                 let balanceString = usersearch.userBalance.toString();

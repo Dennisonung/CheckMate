@@ -2,7 +2,6 @@ const express = require("express");
 const sha512 = require("js-sha512").sha512;
 const fs = require("fs");
 const path = require("path");
-//cooklie parser
 const cookieParser = require('cookie-parser');
 require("./modules/startup.js").run(fs,path);
 const app = express();
